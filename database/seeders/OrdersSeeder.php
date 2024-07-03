@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class BalanceSeeder extends Seeder
+class OrdersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class BalanceSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('balance')->insert($this->getData());
+        DB::table('orders')->insert($this->getData());
     }
 
     /**
@@ -28,9 +28,12 @@ class BalanceSeeder extends Seeder
 
         for ($i = 1; $i <= $count; $i++) {
             $data[] = [
-                'product_id' => fake()->numberBetween(1, 20),
+                'customer' => fake()->userName(),
                 'warehouse_id' => fake()->numberBetween(1, 3),
-                'count' => fake()->numberBetween(0, 100),
+                'status_id' => fake()->numberBetween(1, 3),
+                'completed_at' => fake()->date(),
+                'created_at' => fake()->date(),
+                'updated_at' => fake()->date(),
             ];
         }
 

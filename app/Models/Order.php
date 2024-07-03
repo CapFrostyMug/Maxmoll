@@ -16,9 +16,11 @@ class Order extends Model
     protected $fillable = [
         'customer',
         'warehouse_id',
-        'status',
+        'status_id',
         'completed_at'
     ];
+
+    protected $with = ['warehouse', 'status'];
 
     /**
      * @return BelongsTo
@@ -43,5 +45,17 @@ class Order extends Model
             'order_id',
             'product_id'
         )->withPivot('count');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(
+            Status::class,
+            'status_id',
+            'id'
+        );
     }
 }

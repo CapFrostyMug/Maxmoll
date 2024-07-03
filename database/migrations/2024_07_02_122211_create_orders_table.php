@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
@@ -21,7 +21,11 @@ return new class extends Migration
                 ->constrained('warehouses')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
-            $table->string('status', 20)->nullable(false);
+            $table->foreignId('status_id')
+                ->nullable(false)
+                ->constrained('statuses')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
             $table->timestamp('completed_at');
             $table->timestamps();
         });
@@ -32,7 +36,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('orders');
     }

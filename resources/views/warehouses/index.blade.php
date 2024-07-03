@@ -3,9 +3,9 @@
 @section('title', 'Склады')
 
 @section('content')
-    <div class="row">
+    <div class="row px-5">
 
-        <h3 class="col-12 fw-bold py-5">Список складов</h3>
+        <h3 class="col-12 fw-bold py-5">Склады</h3>
 
         <div class="col-5">
             <table class="table table-bordered table-striped">

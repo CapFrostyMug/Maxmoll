@@ -3,7 +3,7 @@
 @section('title', 'Товары')
 
 @section('content')
-    <div class="row">
+    <div class="row px-5">
 
         <h3 class="col-12 fw-bold py-5">Товары</h3>
 
@@ -18,14 +18,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row" class="text-center align-middle">1</th>
-                        <td class="text-start align-middle">Трусы</td>
-                        <td class="text-center align-middle">Яндекс Маркет</td>
-                        <td class="text-center align-middle">100</td>
-                    </tr>
+                @if(isset($products))
+                    @forelse($products as $item)
+                        <tr>
+                            <th scope="row" class="text-center align-middle">{{ $item->product_id }}</th>
+                            <td class="text-start align-middle">{{ $item->product_name }}</td>
+                            <td class="text-center align-middle">{{ $item->warehouse_name }}</td>
+                            <td class="text-center align-middle">{{ $item->product_count }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="text-center align-middle">Ничего не найдено</td>
+                        </tr>
+                    @endforelse
+                @endif
                 </tbody>
             </table>
         </div>
+
+        @if(isset($products))
+            <div class="col-12 d-flex justify-content-center my-3">
+                {{ $products->links() }}
+            </div>
+        @endif
     </div>
 @endsection
