@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WareHouseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Auth::routes();
+
+Route::view('/', 'home')->name('home');
+
+/**
+ * Склады
+ */
+
+Route::prefix('warehouses')->name('warehouses.')->group(function () {
+    Route::get('/list', [WareHouseController::class, 'index'])->name('index');
+    Route::get('/{id}/products', [WareHouseController::class, 'show'])->name('show');
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix('products')->name('products.')->group(function () {
+    Route::get('/list', [ProductController::class, 'index'])->name('index');
+});
