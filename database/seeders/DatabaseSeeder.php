@@ -25,5 +25,8 @@ class DatabaseSeeder extends Seeder
         $this->call(WarehousesSeeder::class);
         Product::factory(20)->create();
         $this->call(BalanceSeeder::class);
+        $this->call(StatusesSeeder::class);
+        $this->call(OrdersSeeder::class);
+        $this->call(OrdersProductsSeeder::class);
     }
 }
